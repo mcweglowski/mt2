@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  mt.api:
+    image: ${DOCKER_REGISTRY-}mtapi
+    build:
+      context: .
+      dockerfile: mt.API/Dockerfile
