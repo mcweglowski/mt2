@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: mt.API/Dockerfile
+
+  mt.consumer:
+    image: ${DOCKER_REGISTRY-}mtconsumer
+    build:
+      context: .
+      dockerfile: mt.Consumer/Dockerfile
+
