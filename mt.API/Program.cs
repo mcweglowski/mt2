@@ -1,4 +1,5 @@
 using MassTransit;
+using mt.Contracts.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddMassTransit(cfg =>
     {
         config.ConfigureEndpoints(context);
     });
+
+    cfg.AddRequestClient<IRemoteProcedureCallContract>();
 });
 
 var app = builder.Build();

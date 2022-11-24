@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using mt.API.Requests;
+using mt.Contracts.Contracts;
 
 namespace mt.API.Controllers;
 
@@ -9,13 +10,13 @@ namespace mt.API.Controllers;
 public class RabbitController : ControllerBase
 {
 	private readonly ILogger _logger;
-	private readonly IBus _bus;
+	private readonly IRequestClient<IRemoteProcedureCallContract> _requestClient;
 
 	public RabbitController(ILogger<RabbitController> logger,
-		IBus bus)
+        IRequestClient<IRemoteProcedureCallContract> requestClient)
 	{
 		_logger = logger;
-		_bus = bus;
+        _requestClient = requestClient;
 	}
 
 	[HttpPost("direct/")]
@@ -23,4 +24,15 @@ public class RabbitController : ControllerBase
 	{
 		_logger.LogInformation($"{request.Id} {request.Name} {request.Amount}");
 	}
+
+	[HttpPost("remoteProcedureCall/")]
+	public async Task<IActionResult> RemoteProcedureCall([FromBody] DataRequest request)
+	{
+        _logger.LogInformation($"{request.Id} {request.Name} {request.Amount}");
+		
+		var response = await _requestClient.GetResponse<IRemoteProcedureCallResponse>(
+			new { request.Id, request.Name, request.Amount});
+
+		return Ok(response);
+    }
 }
