@@ -1,9 +1,14 @@
 {
   "profiles": {
-    "Docker": {
-      "commandName": "Docker",
-      "publishAllPorts": true,
-      "useSSL": true
+    "mt.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "weatherforecast",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7170;http://localhost:5210"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
