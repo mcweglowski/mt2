@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using mt.API.Requests;
-using mt.Contracts.Contracts;
+using mt.Contracts.RemoteProcedureCallContracts;
 
 namespace mt.API.Controllers;
 

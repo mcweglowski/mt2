@@ -1,8 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Logging;
-using mt.Contracts.Contracts;
-
-namespace mt.Consumer.Consumers;
+using mt.Contracts.RemoteProcedureCallContracts;
 
 public class RemoteProcedureCallConsumer : IConsumer<IRemoteProcedureCallContract>
 {

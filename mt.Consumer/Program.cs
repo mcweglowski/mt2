@@ -1,7 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using mt.Consumer.Consumers;
 
 var builder = new HostBuilder()
     .ConfigureServices(services =>

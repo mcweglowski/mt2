@@ -1,4 +1,4 @@
-﻿namespace mt.Contracts.Contracts;
+﻿namespace mt.Contracts.RemoteProcedureCallContracts;
 
 public interface IRemoteProcedureCallResponse
 {

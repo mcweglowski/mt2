@@ -1,5 +1,5 @@
 using MassTransit;
-using mt.Contracts.Contracts;
+using mt.Contracts.RemoteProcedureCallContracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
