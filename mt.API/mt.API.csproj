@@ -19,4 +19,10 @@
     <ProjectReference Include="..\mt.Contracts\mt.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Properties\launchSettings.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

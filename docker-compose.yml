@@ -6,9 +6,6 @@ services:
     build:
       context: .
       dockerfile: mt.API/Dockerfile
-    ports:
-      - 5100:443
-      - 5200:80
 
   mt.consumer:
     image: ${DOCKER_REGISTRY-}mtconsumer
