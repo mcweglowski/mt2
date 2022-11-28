@@ -6,12 +6,16 @@ services:
     build:
       context: .
       dockerfile: mt.API/Dockerfile
+    depends_on:
+       - rabbitmq
 
   mt.consumer:
     image: ${DOCKER_REGISTRY-}mtconsumer
     build:
       context: .
       dockerfile: mt.Consumer/Dockerfile
+    depends_on:
+       - rabbitmq
 
   rabbitmq:
     image: rabbitmq:3-management-alpine

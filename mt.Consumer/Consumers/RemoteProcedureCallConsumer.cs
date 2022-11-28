@@ -12,10 +12,15 @@ public class RemoteProcedureCallConsumer : IConsumer<IRemoteProcedureCallContrac
         _logger = logger;
     }
 
-    public Task Consume(ConsumeContext<IRemoteProcedureCallContract> context)
+    public async Task Consume(ConsumeContext<IRemoteProcedureCallContract> context)
     {
         _logger.LogInformation($"{context.Message.Id} {context.Message.Name} {context.Message.Amount}");
 
-        return Task.CompletedTask;
+        await context.RespondAsync<IRemoteProcedureCallResponse>(new 
+        {
+            Id = context.Message.Id,
+            Name = context.Message.Name,
+            Amount = context.Message.Amount
+        });
     }
 }

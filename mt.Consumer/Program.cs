@@ -21,4 +21,4 @@ var builder = new HostBuilder()
         logging.AddConsole();
     });
 
-builder.RunConsoleAsync();
+await builder.RunConsoleAsync();
