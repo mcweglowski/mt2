@@ -1,16 +1,28 @@
 ﻿using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using mt.Consumer;
+using mt.Consumer.Consumers;
+using mt.Contracts.Extensions;
+using System.Reflection;
 
 var builder = new HostBuilder()
     .ConfigureServices(services =>
     {
+        services.AddOptions<NodeOptions>();
+
         services.AddMassTransit(cfg => 
         {
-            cfg.AddConsumer<RemoteProcedureCallConsumer>();
+            //cfg.AddConsumer<RemoteProcedureCallConsumer>();
+            //cfg.AddConsumer<ExchangeDirectConsumer>();
+
+            var entryAssembly = Assembly.GetEntryAssembly();
+            cfg.AddConsumers(entryAssembly);
 
             cfg.UsingRabbitMq((context, cfg) => 
             {
+                cfg.ConfigureDirectMessageTopology();
                 cfg.ConfigureEndpoints(context);
             });
         });

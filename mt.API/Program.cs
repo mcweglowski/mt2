@@ -1,4 +1,5 @@
 using MassTransit;
+using mt.Contracts.Extensions;
 using mt.Contracts.RemoteProcedureCallContracts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddMassTransit(cfg =>
 {
     cfg.UsingRabbitMq((context, config) =>
     {
+        config.ConfigureDirectMessageTopology();
+
         config.ConfigureEndpoints(context);
     });
 

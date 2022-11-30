@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using mt.API.Requests;
+using mt.Contracts.ExchangeDirectContracts;
 using mt.Contracts.RemoteProcedureCallContracts;
 
 namespace mt.API.Controllers;
@@ -9,20 +10,31 @@ namespace mt.API.Controllers;
 [Route("[controller]")]
 public class RabbitController : ControllerBase
 {
-	private readonly ILogger _logger;
+    private readonly IBus _bus;
+    private readonly ILogger _logger;
 	private readonly IRequestClient<IRemoteProcedureCallContract> _requestClient;
 
-	public RabbitController(ILogger<RabbitController> logger,
+	public RabbitController(IBus bus,
+		ILogger<RabbitController> logger,
         IRequestClient<IRemoteProcedureCallContract> requestClient)
 	{
+		_bus = bus;
 		_logger = logger;
         _requestClient = requestClient;
 	}
 
 	[HttpPost("direct/")]
-	public void Direct([FromBody] DataRequest request)
+	public async Task Direct([FromBody] DataRequest request)
 	{
 		_logger.LogInformation($"{request.Id} {request.Name} {request.Amount}");
+
+		await _bus.Publish<ExchangeDirectContract>(new
+		{
+			request.Id,
+			NodeId = "500",
+			request.Name,
+			request.Amount
+		});
 	}
 
 	[HttpPost("remoteProcedureCall/")]
