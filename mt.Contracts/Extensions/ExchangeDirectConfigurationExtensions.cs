@@ -8,7 +8,7 @@ public static class ExchangeDirectConfigurationExtensions
 {
     public static void ConfigureDirectMessageTopology(this IRabbitMqBusFactoryConfigurator configurator)
     {
-        configurator.Message<ExchangeDirectContract>(x => x.SetEntityName("content.received"));
+        //configurator.Message<ExchangeDirectContract>(x => x.SetEntityName("content.received"));
 
         configurator.Send<ExchangeDirectContract>(x =>
         {

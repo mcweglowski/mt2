@@ -14,9 +14,6 @@ var builder = new HostBuilder()
 
         services.AddMassTransit(cfg => 
         {
-            //cfg.AddConsumer<RemoteProcedureCallConsumer>();
-            //cfg.AddConsumer<ExchangeDirectConsumer>();
-
             var entryAssembly = Assembly.GetEntryAssembly();
             cfg.AddConsumers(entryAssembly);
 

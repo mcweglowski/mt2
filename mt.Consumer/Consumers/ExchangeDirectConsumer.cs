@@ -25,11 +25,8 @@ public class ExchangeDirectConsumer : IConsumer<ExchangeDirectContract>
 
 public class ExchangeDirectorConsumerDefinition : ConsumerDefinition<ExchangeDirectConsumer>
 {
-    private readonly string _nodeId;
-
     public ExchangeDirectorConsumerDefinition(IOptions<NodeOptions> options)
     {
-        _nodeId = options.Value.NodeId;
         EndpointName = $"direct.client.500";
     }
 
